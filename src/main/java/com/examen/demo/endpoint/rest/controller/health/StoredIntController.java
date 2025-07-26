@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class StoredIntController {
-
-  // Utilisation du répertoire temporaire compatible AWS Lambda
   private static final Path FILE_PATH = Paths.get("/tmp/stored-int.txt");
 
   @GetMapping("/stored-int")
@@ -21,10 +19,10 @@ public class StoredIntController {
     } else {
       int randomInt = new Random().nextInt(1000); // [0,999]
       Files.writeString(
-              FILE_PATH,
-              Integer.toString(randomInt),
-              StandardOpenOption.CREATE,
-              StandardOpenOption.WRITE);
+          FILE_PATH,
+          Integer.toString(randomInt),
+          StandardOpenOption.CREATE,
+          StandardOpenOption.WRITE);
       return "Generated and stored: " + randomInt;
     }
   }
